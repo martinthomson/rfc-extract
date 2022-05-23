@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # Extract sourcecode or artwork content from an RFC XML file or markdown source.
 
+import sys
 import xml.sax
 from xml.sax.saxutils import escape, quoteattr
 from xml.sax.handler import ContentHandler
 
+__version__ = '0.0.1'
 
 class Block:
     def __init__(self, text, filename, line, column, typ):
@@ -64,7 +66,7 @@ def extract_md(f, types=[]):
     keep = True
     typ = ""
     text = ""
-    with open(f) if isinstance(f, str) else f as r:
+    with sys.stdin if f == "-" else open(f) as r:
         for line in r:
             ln = ln + 1
             block = line[:3] == "```" or line[:3] == "~~~"
@@ -119,8 +121,6 @@ def extract(f, types=[], ext=""):
 
 
 if __name__ == "__main__":
-    import sys
-
     def usage():
         print(
             f"Usage: {sys.argv[0]} [-t <types...>] [-x <md|xml>] file...",
@@ -147,7 +147,7 @@ if __name__ == "__main__":
         elif a == "-t":
             t = True
         elif a == "-":
-            files.append(sys.stdin)
+            files.append("-")
         elif a[0] == "-":
             usage()
         else:
