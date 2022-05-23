@@ -6,7 +6,8 @@ import xml.sax
 from xml.sax.saxutils import escape, quoteattr
 from xml.sax.handler import ContentHandler
 
-__version__ = '0.0.1'
+__version__ = "0.0.1"
+
 
 class Block:
     def __init__(self, text, filename, line, column, typ):
@@ -120,7 +121,7 @@ def extract(f, types=[], ext=""):
     raise NotImplementedError(f"file type '{typ}' not supported")
 
 
-if __name__ == "__main__":
+def main():
     def usage():
         print(
             f"Usage: {sys.argv[0]} [-t <types...>] [-x <md|xml>] file...",
@@ -165,3 +166,7 @@ if __name__ == "__main__":
             found = True
         if not found:
             print(f"{f}: no blocks found")
+
+
+if __name__ == "__main__":
+    main()
