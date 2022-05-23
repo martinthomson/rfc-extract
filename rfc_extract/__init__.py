@@ -10,12 +10,13 @@ __version__ = "0.0.1"
 
 
 class Block:
-    def __init__(self, text, filename, line, column, typ):
+    def __init__(self, text, filename, line, column, typ, tag=None):
         self.text = text
         self.filename = filename
         self.line = line
         self.column = column
         self.typ = typ
+        self.tag = tag
 
     def __str__(self):
         return self.text
@@ -46,6 +47,7 @@ class _ExtractXML(ContentHandler):
                 line=self._locator.getLineNumber(),
                 column=self._locator.getColumnNumber(),
                 typ=typ,
+                tag=tag,
             )
 
     def endElement(self, tag):
