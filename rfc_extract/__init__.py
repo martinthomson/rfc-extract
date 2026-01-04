@@ -120,7 +120,7 @@ def extract(f, types=[], ext=""):
         return extract_md(f, types)
     if ext == "xml":
         return extract_xml(f, types)
-    raise NotImplementedError(f"file type '{typ}' not supported")
+    raise NotImplementedError(f"file type '{ext}' not supported")
 
 
 def main():
